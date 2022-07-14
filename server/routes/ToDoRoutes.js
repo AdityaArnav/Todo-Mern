@@ -29,5 +29,45 @@ router.post('/api/item', async (req, res)=>{
     }
 })
 
+//creating second route to get all data
+router.get('/api/item',async (req,res)=>{
+try{
+const allTodoItems = await todoItemsModel.find({});
+// Returning all items in database in json format
+res.status(200).json(allTodoItems);
+}
+catch(err){
+  res.json(err);
+}
+})
+
+// Creating third route to get data by id
+router.get('/api/item/:id', async (req,res)=>{
+  try{
+    // finding the item by its id
+    const getItemById = await todoItemsModel.findById(req.params.id)
+    res.status(200).json(getItemById);
+  }
+  catch(err){
+    res.json(err);
+  }
+})
+
+// Creating fourth route to update data.
+router.put('/api/item/:id', async (req,res)=>{
+  try{
+    // finding the item by its id and updating it.
+    const updateItem = await todoItemsModel.findByIdAndUpdate(req.params.id, {$set: req.body});
+    res.status(200).json('item updated');
+  }
+  catch(err){
+    res.json(err);
+  }
+})
+
+
+
+
+
 // exporting router
 module.exports = router;
