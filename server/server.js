@@ -25,12 +25,17 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require('dotenv').config();
+const cors = require('cors');
 
 const app = express();
 
 
 // using express.json() to get data into json format
 app.use(express.json());
+
+// using cors to send data from react to our server and to allow access from diffrent address
+app.use(cors());
+
 
 // PORT - ----using dotenv file help us to hide our secret data like port, database credentials and secret keys..
 const PORT = process.env.PORT || 5500;
